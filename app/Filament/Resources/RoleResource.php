@@ -61,6 +61,7 @@ class RoleResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
@@ -82,4 +83,10 @@ class RoleResource extends Resource
             'edit' => Pages\EditRole::route('/{record}/edit'),
         ];
     }
+    public static function getEloquentQuery(): Builder
+{
+    //con esta linea consulta todos los roles menos el administrador
+    //sirve para ocultar y no lo puedan modificar o eliminar
+    return parent::getEloquentQuery()->where('name','!=','Administrador');
+}
 }

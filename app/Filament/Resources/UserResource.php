@@ -3,6 +3,8 @@
 namespace App\Filament\Resources;
 use App\Filament\Resources\UserResource\Pages\CreateUser;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Select;
+
 use Filament\Pages\Page;
 use Illuminate\Support\Facades\Hash;
 use Filament\Tables\Columns\TextColumn;
@@ -43,7 +45,7 @@ class UserResource extends Resource
                ->label('Email address')
                ->email(),
 
-               Forms\Components\TextInput::make('password')
+               TextInput::make('password')
                ->label('Password')
                ->password()
                ->disableAutocomplete()
@@ -62,14 +64,21 @@ class UserResource extends Resource
                                     )->label(static fn(Page $livewire): string =>
                                     ($livewire instanceof EditUser)?'New Password':'Password'
                                     ),
-                Forms\Components\TextInput::make('passwordConfirmation')
+                TextInput::make('passwordConfirmation')
                 ->label('Password confirmation')
                 ->password()
                 ->disableAutocomplete()
                 ->minLength(8)
                 ->required(static fn(Page $livewire): string=>
                                     $livewire instanceof CreateUser)
-                ->dehydrated(false)
+                ->dehydrated(false),
+
+                Select::make('roles')
+                    ->multiple()
+                    ->relationship('roles', 'name')->preload(),
+
+                
+
             ]);
     }
 

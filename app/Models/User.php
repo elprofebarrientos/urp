@@ -45,9 +45,10 @@ class User extends Authenticatable implements FilamentUser
         'password' => 'hashed',
     ];
 
+    // con esta linea se controla que roles puede acceder a la pagina principal filament
     public function canAccessFilament(): bool
     {
-        return $this->hasRole('Administrador');
+        return $this->hasRole(['Administrador','Secretaria']);
     }
 
 }

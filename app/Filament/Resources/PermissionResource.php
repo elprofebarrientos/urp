@@ -50,7 +50,7 @@ class PermissionResource extends Resource
             ->columns([
                 TextColumn::make('id')->sortable(),
                 TextColumn::make('name')->sortable()->searchable(),
-                TextColumn::make('created_at')->dateTime()
+                TextColumn::make('created_at')->dateTime('d-M-Y')
 
             ])
             ->filters([

@@ -5,8 +5,8 @@ use App\Filament\Resources\UserResource\Pages\CreateUser;
 use Filament\Forms\Components\TextInput;
 use Filament\Pages\Page;
 use Illuminate\Support\Facades\Hash;
-
 use Filament\Tables\Columns\TextColumn;
+
 use App\Filament\Resources\UserResource\Pages;
 use App\Filament\Resources\UserResource\RelationManagers;
 use App\Models\User;
@@ -38,12 +38,15 @@ class UserResource extends Resource
 
                TextInput::make('email')
                ->required()
+               ->regex('/^.+@.+$/i')
+               ->unique(ignoreRecord: true)
                ->label('Email address')
                ->email(),
 
                Forms\Components\TextInput::make('password')
                ->label('Password')
                ->password()
+               ->disableAutocomplete()
                ->minLength(8)
                ->same('passwordConfirmation')
                ->dehydrateStateUsing(static fn(null|string $state):
@@ -62,6 +65,7 @@ class UserResource extends Resource
                 Forms\Components\TextInput::make('passwordConfirmation')
                 ->label('Password confirmation')
                 ->password()
+                ->disableAutocomplete()
                 ->minLength(8)
                 ->required(static fn(Page $livewire): string=>
                                     $livewire instanceof CreateUser)

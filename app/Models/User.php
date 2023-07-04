@@ -9,8 +9,10 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
+// si queremos controlar acceso general al panel de administracion
+//class User extends Authenticatable implements FilamentUser
 
-class User extends Authenticatable implements FilamentUser
+class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable, HasRoles;
 
@@ -45,11 +47,11 @@ class User extends Authenticatable implements FilamentUser
         'password' => 'hashed',
     ];
 
-    // con esta linea se controla que roles puede accephp artisnader a la pagina principal filament
-    public function canAccessFilament(): bool
+    // si queremos controlar acceso general al panel de administracion
+   /* public function canAccessFilament(): bool
     {
 
         return $this->hasRole(['Administrador','Secretaria']);
-    }
+    }*/
 
 }

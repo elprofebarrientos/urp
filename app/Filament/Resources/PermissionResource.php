@@ -8,7 +8,8 @@ use Filament\Notifications\Notification;
 
 use App\Filament\Resources\PermissionResource\Pages;
 use App\Filament\Resources\PermissionResource\RelationManagers;
-use Spatie\Permission\Models\Permission;
+use App\Models\Permission;
+
 use Filament\Forms;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
